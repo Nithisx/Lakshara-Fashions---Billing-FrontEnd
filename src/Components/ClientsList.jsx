@@ -10,7 +10,7 @@ const ClientsList = () => {
   const [error, setError] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+  const API_URL = import.meta.env.VITE_API_URL || 'https://lakshara-fashions-billing-backend.onrender.com/api';
 
   const fetchClients = async () => {
     setLoading(true);

@@ -14,7 +14,7 @@ const InvoicesList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [fetchingInvoiceId, setFetchingInvoiceId] = useState(null); // tracking button load state
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+  const API_URL = import.meta.env.VITE_API_URL || 'https://lakshara-fashions-billing-backend.onrender.com/api';
 
   const fetchInvoices = async () => {
     setLoading(true);
