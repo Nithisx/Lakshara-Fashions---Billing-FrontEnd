@@ -142,30 +142,30 @@ const CreateInvoice = () => {
   };
 
   return (
-    <main className="flex-1 p-8 max-w-5xl mx-auto w-full font-sans text-slate-100 bg-slate-950">
+    <main className="flex-1 p-8 max-w-5xl mx-auto w-full font-sans text-slate-800 bg-slate-50">
       {/* Back Button */}
       <button
         onClick={() => navigate('/dashboard/invoices')}
-        className="flex items-center gap-2 text-slate-400 hover:text-slate-200 transition text-sm mb-6 cursor-pointer"
+        className="flex items-center gap-2 text-slate-500 hover:text-slate-800 transition text-sm mb-6 cursor-pointer"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Back to Invoices</span>
       </button>
 
       {/* Header */}
-      <header className="mb-8 border-b border-slate-900 pb-6">
-        <span className="text-xs font-semibold text-indigo-400 tracking-wider uppercase block mb-1">
+      <header className="mb-8 border-b border-slate-200 pb-6">
+        <span className="text-xs font-semibold text-indigo-600 tracking-wider uppercase block mb-1">
           POS Billing Terminal
         </span>
-        <h2 className="text-3xl font-extrabold tracking-tight text-white">
+        <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
           Create New Invoice
         </h2>
-        <p className="text-slate-400 text-sm mt-1">Generate receipts for Lakshara Fashions boutique store</p>
+        <p className="text-slate-500 text-sm mt-1">Generate receipts for Lakshara Fashions boutique store</p>
       </header>
 
       {/* Error alert box */}
       {error && (
-        <div className="mb-6 p-4 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-sm">
+        <div className="mb-6 p-4 bg-rose-50 border border-rose-200 rounded-xl text-rose-600 text-sm">
           {error}
         </div>
       )}
@@ -175,12 +175,12 @@ const CreateInvoice = () => {
         
         {/* Customer & Invoice Details */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-slate-900/50 backdrop-blur-md border border-slate-800/80 p-6 rounded-2xl space-y-4">
-            <h3 className="text-base font-bold text-white mb-3">Customer Information</h3>
+          <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-4 shadow-sm">
+            <h3 className="text-base font-bold text-slate-900 mb-3">Customer Information</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                   Customer Name
                 </label>
                 <input
@@ -188,13 +188,13 @@ const CreateInvoice = () => {
                   placeholder="Enter name"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-850 hover:border-slate-750 focus:border-indigo-500 rounded-xl py-2.5 px-4 text-white placeholder-slate-600 outline-none transition text-sm"
+                  className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:border-indigo-500 rounded-xl py-2.5 px-4 text-slate-800 placeholder-slate-400 outline-none transition text-sm"
                   required
                 />
               </div>
               
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                   Customer Phone / Mobile
                 </label>
                 <input
@@ -202,7 +202,7 @@ const CreateInvoice = () => {
                   placeholder="Enter number"
                   value={customerPhone}
                   onChange={(e) => setCustomerPhone(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-850 hover:border-slate-750 focus:border-indigo-500 rounded-xl py-2.5 px-4 text-white placeholder-slate-600 outline-none transition text-sm"
+                  className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:border-indigo-500 rounded-xl py-2.5 px-4 text-slate-800 placeholder-slate-400 outline-none transition text-sm"
                   required
                 />
               </div>
@@ -210,12 +210,12 @@ const CreateInvoice = () => {
           </div>
 
           {/* Add Item Panel */}
-          <div className="bg-slate-900/50 backdrop-blur-md border border-slate-800/80 p-6 rounded-2xl">
-            <h3 className="text-base font-bold text-white mb-4">Add Clothes / Apparel Items</h3>
+          <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
+            <h3 className="text-base font-bold text-slate-900 mb-4">Add Clothes / Apparel Items</h3>
             
             <form onSubmit={handleAddItem} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
               <div className="md:col-span-2">
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                   Item Description / Name
                 </label>
                 <input
@@ -223,12 +223,12 @@ const CreateInvoice = () => {
                   placeholder="e.g. Silk Saree, Designer Kurti"
                   value={itemName}
                   onChange={(e) => setItemName(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-850 hover:border-slate-750 focus:border-indigo-500 rounded-xl py-2.5 px-4 text-white placeholder-slate-600 outline-none transition text-sm"
+                  className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:border-indigo-500 rounded-xl py-2.5 px-4 text-slate-800 placeholder-slate-400 outline-none transition text-sm"
                 />
               </div>
               
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                   Quantity
                 </label>
                 <input
@@ -236,16 +236,16 @@ const CreateInvoice = () => {
                   min="1"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-850 hover:border-slate-750 focus:border-indigo-500 rounded-xl py-2.5 px-4 text-white outline-none transition text-sm"
+                  className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:border-indigo-500 rounded-xl py-2.5 px-4 text-slate-800 outline-none transition text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                   Unit Price (₹)
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm">₹</span>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm">₹</span>
                   <input
                     type="number"
                     min="0.01"
@@ -253,7 +253,7 @@ const CreateInvoice = () => {
                     placeholder="0.00"
                     value={unitPrice}
                     onChange={(e) => setUnitPrice(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-850 hover:border-slate-750 focus:border-indigo-500 rounded-xl py-2.5 pl-8 pr-4 text-white placeholder-slate-600 outline-none transition text-sm"
+                    className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:border-indigo-500 rounded-xl py-2.5 pl-8 pr-4 text-slate-800 placeholder-slate-400 outline-none transition text-sm"
                   />
                 </div>
               </div>
@@ -261,7 +261,7 @@ const CreateInvoice = () => {
               <div className="md:col-span-4 flex justify-end mt-2">
                 <button
                   type="submit"
-                  className="bg-slate-800 hover:bg-slate-700 text-indigo-400 hover:text-indigo-300 font-semibold px-5 py-2.5 rounded-xl border border-slate-750 flex items-center gap-2 cursor-pointer text-sm transition"
+                  className="bg-white hover:bg-indigo-50 text-indigo-600 hover:text-indigo-700 font-semibold px-5 py-2.5 rounded-xl border border-indigo-200 hover:border-indigo-300 flex items-center gap-2 cursor-pointer text-sm transition"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Add Item to List</span>
@@ -271,20 +271,20 @@ const CreateInvoice = () => {
           </div>
 
           {/* Items Summary Table */}
-          <div className="bg-slate-900/50 backdrop-blur-md border border-slate-800/80 rounded-2xl overflow-hidden">
-            <div className="p-6 border-b border-slate-850">
-              <h3 className="text-base font-bold text-white">Itemized Inventory</h3>
+          <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+            <div className="p-6 border-b border-slate-200">
+              <h3 className="text-base font-bold text-slate-900">Itemized Inventory</h3>
             </div>
             
             {items.length === 0 ? (
-              <div className="py-12 text-center text-slate-500 text-sm">
+              <div className="py-12 text-center text-slate-400 text-sm">
                 No items added. Fill out description, quantity, price and click Add Item above.
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-slate-850 text-slate-400 text-xs font-bold uppercase bg-slate-950/20">
+                    <tr className="border-b border-slate-200 text-slate-400 text-xs font-bold uppercase bg-slate-50">
                       <th className="py-3 px-6">Description</th>
                       <th className="py-3 px-6 text-center">Qty</th>
                       <th className="py-3 px-6 text-right">Price</th>
@@ -292,18 +292,18 @@ const CreateInvoice = () => {
                       <th className="py-3 px-6 text-right">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-850 text-sm">
+                  <tbody className="divide-y divide-slate-100 text-sm">
                     {items.map((item) => (
-                      <tr key={item.id} className="hover:bg-slate-900/20">
-                        <td className="py-3.5 px-6 font-medium text-slate-200">{item.item_name}</td>
-                        <td className="py-3.5 px-6 text-center text-slate-400">{item.quantity}</td>
-                        <td className="py-3.5 px-6 text-right text-slate-400">₹{item.unit_price.toFixed(2)}</td>
-                        <td className="py-3.5 px-6 text-right text-white font-semibold">₹{item.total_price.toFixed(2)}</td>
+                      <tr key={item.id} className="hover:bg-slate-50/70">
+                        <td className="py-3.5 px-6 font-medium text-slate-800">{item.item_name}</td>
+                        <td className="py-3.5 px-6 text-center text-slate-500">{item.quantity}</td>
+                        <td className="py-3.5 px-6 text-right text-slate-500">₹{item.unit_price.toFixed(2)}</td>
+                        <td className="py-3.5 px-6 text-right text-slate-900 font-semibold">₹{item.total_price.toFixed(2)}</td>
                         <td className="py-3.5 px-6 text-right">
                           <button
                             type="button"
                             onClick={() => handleRemoveItem(item.id)}
-                            className="text-rose-500 hover:text-rose-400 p-1.5 rounded-lg hover:bg-rose-500/10 transition cursor-pointer"
+                            className="text-rose-500 hover:text-rose-600 p-1.5 rounded-lg hover:bg-rose-50 transition cursor-pointer"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -319,41 +319,41 @@ const CreateInvoice = () => {
 
         {/* Invoice Metadata & Action Sidebar */}
         <div className="space-y-6">
-          <div className="bg-slate-900/50 backdrop-blur-md border border-slate-800/80 p-6 rounded-2xl space-y-5">
-            <h3 className="text-base font-bold text-white border-b border-slate-800 pb-3">Invoice Details</h3>
+          <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-5 shadow-sm">
+            <h3 className="text-base font-bold text-slate-900 border-b border-slate-200 pb-3">Invoice Details</h3>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
                   Invoice Number
                 </label>
-                <div className="bg-slate-950 border border-slate-850 text-slate-300 rounded-xl py-2 px-3 text-sm font-mono select-all">
+                <div className="bg-slate-50 border border-slate-200 text-slate-700 rounded-xl py-2 px-3 text-sm font-mono select-all">
                   {invoiceNumber}
                 </div>
               </div>
               
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
                   Billing Date
                 </label>
                 <input
                   type="date"
                   value={invoiceDate}
                   onChange={(e) => setInvoiceDate(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-850 focus:border-indigo-500 rounded-xl py-2 px-3 text-slate-300 outline-none transition text-sm"
+                  className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-xl py-2 px-3 text-slate-700 outline-none transition text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
                   Payment Method
                 </label>
                 <div className="relative">
-                  <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                  <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                   <select
                     value={paymentMethod}
                     onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-850 focus:border-indigo-500 rounded-xl py-2 pl-9 pr-4 text-slate-300 outline-none transition text-sm appearance-none cursor-pointer"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-xl py-2 pl-9 pr-4 text-slate-700 outline-none transition text-sm appearance-none cursor-pointer"
                   >
                     <option value="Cash">Cash</option>
                     <option value="Card">Card</option>
@@ -365,18 +365,18 @@ const CreateInvoice = () => {
             </div>
 
             {/* Calculations */}
-            <div className="border-t border-slate-800 pt-5 space-y-3.5">
+            <div className="border-t border-slate-200 pt-5 space-y-3.5">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-400">Total Items</span>
-                <span className="font-semibold text-slate-200">{items.reduce((sum, item) => sum + item.quantity, 0)}</span>
+                <span className="text-slate-500">Total Items</span>
+                <span className="font-semibold text-slate-700">{items.reduce((sum, item) => sum + item.quantity, 0)}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-slate-400">Tax / GST</span>
-                <span className="font-semibold text-emerald-500">₹0.00 (Incl.)</span>
+                <span className="text-slate-500">Tax / GST</span>
+                <span className="font-semibold text-emerald-600">₹0.00 (Incl.)</span>
               </div>
-              <div className="flex justify-between border-t border-slate-800 pt-3.5">
-                <span className="text-base font-bold text-white">Grand Total</span>
-                <span className="text-xl font-black text-violet-400">₹{totalBill.toFixed(2)}</span>
+              <div className="flex justify-between border-t border-slate-200 pt-3.5">
+                <span className="text-base font-bold text-slate-900">Grand Total</span>
+                <span className="text-xl font-black text-indigo-600">₹{totalBill.toFixed(2)}</span>
               </div>
             </div>
 
@@ -384,7 +384,7 @@ const CreateInvoice = () => {
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 active:scale-98 text-white font-semibold py-3 px-4 rounded-xl shadow-lg shadow-indigo-600/25 hover:shadow-indigo-600/35 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              className="w-full bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] text-white font-semibold py-3 px-4 rounded-xl shadow-sm shadow-indigo-600/25 hover:shadow-indigo-600/35 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
