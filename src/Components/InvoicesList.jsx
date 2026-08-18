@@ -127,7 +127,7 @@ const InvoicesList = () => {
   });
 
   return (
-    <main className="flex-1 p-8 max-w-7xl mx-auto w-full font-sans text-slate-800 bg-slate-50">
+    <main className="flex-1 p-4 md:p-8 w-full font-sans text-slate-800 bg-slate-50 min-h-screen">
       {/* Header */}
       <header className="flex justify-between items-center mb-8 border-b border-slate-200 pb-6">
         <div>

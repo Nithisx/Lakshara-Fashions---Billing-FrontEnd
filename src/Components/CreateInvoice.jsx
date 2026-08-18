@@ -142,7 +142,7 @@ const CreateInvoice = () => {
   };
 
   return (
-    <main className="flex-1 p-8 max-w-5xl mx-auto w-full font-sans text-slate-800 bg-slate-50">
+    <main className="flex-1 p-4 md:p-8 w-full font-sans text-slate-800 bg-slate-50 min-h-screen">
       {/* Back Button */}
       <button
         onClick={() => navigate('/dashboard/invoices')}

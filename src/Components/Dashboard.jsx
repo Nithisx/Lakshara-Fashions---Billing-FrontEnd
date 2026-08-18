@@ -109,7 +109,7 @@ const Dashboard = () => {
   }
 
   return (
-    <main className="flex-1 p-8 overflow-y-auto max-w-7xl mx-auto w-full bg-slate-50 text-slate-800 font-sans">
+    <main className="flex-1 p-4 md:p-8 overflow-y-auto w-full bg-slate-50 text-slate-800 font-sans min-h-screen">
       {/* Header */}
       <header className="flex justify-between items-start mb-8 border-b border-slate-200 pb-6">
         <div>
@@ -122,10 +122,10 @@ const Dashboard = () => {
           <p className="text-slate-500 text-sm mt-1">{today}</p>
         </div>
         <button 
-          onClick={() => navigate('/dashboard/invoices/new')}
+          onClick={() => navigate('/dashboard/orders/new')}
           className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-sm shadow-indigo-600/15 hover:shadow-indigo-600/25 transition duration-200 text-sm cursor-pointer active:scale-[0.98]"
         >
-          + Create Invoice
+          + Create Order
         </button>
       </header>
 

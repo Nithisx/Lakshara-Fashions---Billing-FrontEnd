@@ -8,6 +8,11 @@ import InvoicesList from './Components/InvoicesList';
 import CreateInvoice from './Components/CreateInvoice';
 import ClientsList from './Components/ClientsList';
 import ShareInvoice from './Components/ShareInvoice';
+import CustomersList from './Components/CustomersList';
+import CreateCustomer from './Components/CreateCustomer';
+import OrdersList from './Components/OrdersList';
+import CreateOrder from './Components/CreateOrder';
+import OrderDetails from './Components/OrderDetails';
 
 // Premium Loading Spinner Screen
 const LoadingScreen = () => (
@@ -84,6 +89,11 @@ function App() {
             <Route path="invoices" element={<InvoicesList />} />
             <Route path="invoices/new" element={<CreateInvoice />} />
             <Route path="clients" element={<ClientsList />} />
+            <Route path="customers" element={<CustomersList />} />
+            <Route path="customers/new" element={<CreateCustomer />} />
+            <Route path="orders" element={<OrdersList />} />
+            <Route path="orders/new" element={<CreateOrder />} />
+            <Route path="orders/:id" element={<OrderDetails />} />
           </Route>
 
           {/* Catch all and Redirect */}
