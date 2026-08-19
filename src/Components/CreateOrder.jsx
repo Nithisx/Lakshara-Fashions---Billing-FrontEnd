@@ -610,7 +610,9 @@ const CreateOrder = () => {
                       disabled={customerCreating}
                       className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2.5 rounded-xl text-xs transition disabled:opacity-60"
                     >
-                      {customerCreating ? "Creating Customer..." : "Create Customer"}
+                      {customerCreating
+                        ? "Creating Customer..."
+                        : "Create Customer"}
                     </button>
                   </div>
                 </div>
