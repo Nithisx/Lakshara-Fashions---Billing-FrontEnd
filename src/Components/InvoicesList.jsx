@@ -237,7 +237,7 @@ const InvoicesList = () => {
                         </div>
                       </td>
                       <td className="py-4 px-6 text-slate-900 font-extrabold text-base">
-                        ₹{Number(inv.total_amount).toFixed(2)}
+                        ${Number(inv.total_amount).toFixed(2)}
                       </td>
                       <td className="py-4 px-6 text-right">
                         <div className="flex items-center justify-end gap-2">

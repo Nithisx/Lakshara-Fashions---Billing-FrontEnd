@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingBag, Search, RefreshCw, AlertCircle, Calendar, CreditCard, ChevronRight } from 'lucide-react';
+import { ShoppingBag, Search, RefreshCw, AlertCircle, Calendar, Clock, PlayCircle, CheckCircle2, Wallet, PiggyBank, CreditCard } from 'lucide-react';
 
 const OrdersList = () => {
   const { token } = useAuth();
@@ -68,6 +68,79 @@ const OrdersList = () => {
     }
   };
 
+  // Summary counts by status
+  const pendingCount = orders.filter(o => o.status === 'Pending').length;
+  const inProgressCount = orders.filter(o => o.status === 'In Progress').length;
+  const completedCount = orders.filter(o => o.status === 'Completed').length;
+
+  // Financial summary
+  const totalOrderAmount = orders.reduce((sum, o) => sum + (parseFloat(o.stitching_price) || 0) * (o.quantity || 1), 0);
+  const totalAdvancePaid = orders.reduce((sum, o) => sum + (parseFloat(o.advance_paid) || 0), 0);
+  const totalBalanceDue = orders.reduce((sum, o) => sum + (parseFloat(o.balance_due) || 0), 0);
+
+  const paymentCards = [
+    {
+      title: 'Total Amount',
+      value: `$${totalOrderAmount.toFixed(2)}`,
+      icon: Wallet,
+      iconBg: 'bg-indigo-50',
+      iconColor: 'text-indigo-600',
+      borderColor: 'border-indigo-100',
+      textColor: 'text-indigo-700',
+    },
+    {
+      title: 'Advance Paid',
+      value: `$${totalAdvancePaid.toFixed(2)}`,
+      icon: PiggyBank,
+      iconBg: 'bg-emerald-50',
+      iconColor: 'text-emerald-600',
+      borderColor: 'border-emerald-100',
+      textColor: 'text-emerald-700',
+    },
+    {
+      title: 'Balance Due',
+      value: `$${totalBalanceDue.toFixed(2)}`,
+      icon: CreditCard,
+      iconBg: 'bg-rose-50',
+      iconColor: 'text-rose-600',
+      borderColor: 'border-rose-100',
+      textColor: 'text-rose-700',
+    },
+  ];
+
+  const summaryCards = [
+    {
+      title: 'Pending Orders',
+      count: pendingCount,
+      icon: Clock,
+      iconBg: 'bg-amber-50',
+      iconColor: 'text-amber-600',
+      borderColor: 'border-amber-100',
+      textColor: 'text-amber-700',
+      onClick: () => setStatusFilter('Pending'),
+    },
+    {
+      title: 'In Progress',
+      count: inProgressCount,
+      icon: PlayCircle,
+      iconBg: 'bg-blue-50',
+      iconColor: 'text-blue-600',
+      borderColor: 'border-blue-100',
+      textColor: 'text-blue-700',
+      onClick: () => setStatusFilter('In Progress'),
+    },
+    {
+      title: 'Completed Orders',
+      count: completedCount,
+      icon: CheckCircle2,
+      iconBg: 'bg-emerald-50',
+      iconColor: 'text-emerald-600',
+      borderColor: 'border-emerald-100',
+      textColor: 'text-emerald-700',
+      onClick: () => setStatusFilter('Completed'),
+    },
+  ];
+
   return (
     <main className="flex-1 p-4 md:p-8 w-full bg-slate-50 text-slate-800 font-sans min-h-screen">
       {/* Header */}
@@ -88,6 +161,53 @@ const OrdersList = () => {
           + Create Order
         </button>
       </header>
+
+      {/* Summary Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        {summaryCards.map((card) => {
+          const Icon = card.icon;
+          const filterStatus = card.title === 'Pending Orders' ? 'Pending' : card.title === 'In Progress' ? 'In Progress' : 'Completed';
+          const isActive = statusFilter === filterStatus;
+          return (
+            <button
+              key={card.title}
+              onClick={card.onClick}
+              className={`flex items-center justify-between bg-white border rounded-2xl p-5 text-left shadow-sm transition duration-200 cursor-pointer active:scale-[0.98] ${
+                isActive ? `${card.borderColor} ring-2 ring-indigo-100` : 'border-slate-200 hover:border-slate-300 hover:shadow-md'
+              }`}
+            >
+              <div>
+                <p className={`text-xs font-bold tracking-wider uppercase ${card.textColor}`}>{card.title}</p>
+                <p className="mt-1 text-3xl font-extrabold text-slate-900">{card.count}</p>
+              </div>
+              <div className={`p-3 ${card.iconBg} ${card.iconColor} rounded-xl`}>
+                <Icon className="w-6 h-6" />
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Payment Summary Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        {paymentCards.map((card) => {
+          const Icon = card.icon;
+          return (
+            <div
+              key={card.title}
+              className={`flex items-center justify-between bg-white border ${card.borderColor} rounded-2xl p-5 shadow-sm`}
+            >
+              <div>
+                <p className={`text-xs font-bold tracking-wider uppercase ${card.textColor}`}>{card.title}</p>
+                <p className="mt-1 text-2xl font-extrabold text-slate-900">{card.value}</p>
+              </div>
+              <div className={`p-3 ${card.iconBg} ${card.iconColor} rounded-xl`}>
+                <Icon className="w-6 h-6" />
+              </div>
+            </div>
+          );
+        })}
+      </div>
 
       {/* Toolbar / Search & Filters */}
       <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-6">
@@ -164,7 +284,9 @@ const OrdersList = () => {
                   <th className="py-4 px-6 font-semibold">Service</th>
                   <th className="py-4 px-6 font-semibold">Delivery Date</th>
                   <th className="py-4 px-6 font-semibold text-center">Status</th>
-                  <th className="py-4 px-6 font-semibold text-right">Price</th>
+                  <th className="py-4 px-6 font-semibold text-right">Total</th>
+                  <th className="py-4 px-6 font-semibold text-right">Advance</th>
+                  <th className="py-4 px-6 font-semibold text-right">Balance Due</th>
                   <th className="py-4 px-6 font-semibold text-right">Invoice</th>
                 </tr>
               </thead>
@@ -220,7 +342,19 @@ const OrdersList = () => {
 
                       {/* Price */}
                       <td className="py-4 px-6 text-slate-900 font-bold text-right">
-                        ₹{(parseFloat(order.stitching_price) * order.quantity).toFixed(2)}
+                        ${(parseFloat(order.stitching_price) * order.quantity).toFixed(2)}
+                      </td>
+
+                      {/* Advance Paid */}
+                      <td className="py-4 px-6 text-emerald-700 font-bold text-right">
+                        ${(parseFloat(order.advance_paid) || 0).toFixed(2)}
+                      </td>
+
+                      {/* Balance Due */}
+                      <td className="py-4 px-6 text-right">
+                        <span className={`font-bold ${(parseFloat(order.balance_due) || 0) > 0 ? 'text-rose-600' : 'text-slate-400'}`}>
+                          ${(parseFloat(order.balance_due) || 0).toFixed(2)}
+                        </span>
                       </td>
 
                       {/* Linked Invoice status */}

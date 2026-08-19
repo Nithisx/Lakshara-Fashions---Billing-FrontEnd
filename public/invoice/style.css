@@ -1,0 +1,414 @@
+/* ==================== GLOBAL RESET ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Hide number input spinners for a clean, print-ready look */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* ==================== PAGE / CONTAINER ==================== */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #e5e7eb;
+  padding: 20px 0;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+#invoice-container {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #000000;
+  padding: 12mm 10mm;
+  color: #000000;
+  font-size: 13px;
+  position: relative;
+}
+
+/* ==================== B. HEADER SECTION ==================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #000000;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.header-left .logo-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  display: block;
+}
+
+.header-right {
+  text-align: right;
+}
+
+.company-name {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 27px;
+  font-weight: 700;
+  color: #000000;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+}
+
+.company-address {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.company-phone {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.company-phone .diamond {
+  font-size: 10px;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+
+/* ==================== TOP DETAILS TABLE ==================== */
+.top-details {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-bottom: 10px;
+}
+
+.top-details td {
+  border: 1px solid #000000;
+  padding: 4px 8px;
+  height: 34px;
+}
+
+.top-details label {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 13px;
+  margin-right: 4px;
+}
+
+.serial-no-label,
+.serial-no-input {
+  color: #FF3B30;
+}
+
+.serial-no-input {
+  font-weight: 700;
+  width: 60px;
+  text-align: center;
+}
+
+/* ==================== SECTION BARS ==================== */
+.section-bar {
+  background: #000000;
+  text-align: center;
+  padding: 3px 0;
+  border: 1px solid #000000;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.section-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+/* ==================== C. SALES DETAILS TABLE ==================== */
+.sales-details {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-bottom: 8px;
+}
+
+.sales-details th,
+.sales-details td {
+  border: 1px solid #000000;
+}
+
+.sales-details th {
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 5px 4px;
+  text-align: center;
+}
+
+.col-sno { width: 8%; }
+.col-desc { width: 44%; }
+.col-qty { width: 12%; }
+.col-rate { width: 18%; }
+.col-amount { width: 18%; }
+
+.sales-details td {
+  padding: 0;
+  height: 28px;
+}
+
+.cell-sno input,
+.cell-desc input,
+.cell-qty input,
+.cell-rate input,
+.cell-amount input {
+  width: 100%;
+  height: 100%;
+  min-height: 26px;
+  border: none;
+  background: transparent;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #000000;
+  padding: 2px 6px;
+  outline: none;
+}
+
+.cell-sno input {
+  text-align: center;
+  font-weight: 700;
+}
+
+.cell-qty input,
+.cell-rate input,
+.cell-amount input {
+  text-align: right;
+}
+
+/* ==================== D. TOTALS SECTION ==================== */
+.totals-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+.totals-table {
+  width: 58%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.totals-table td {
+  border: 1px solid #000000;
+  padding: 5px 8px;
+}
+
+.total-label {
+  width: 62%;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.total-value {
+  width: 38%;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.totals-input {
+  width: calc(100% - 14px);
+  max-width: 130px;
+  border: none;
+  border-bottom: 1px dotted #000000;
+  background: transparent;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+  padding: 1px 2px;
+  outline: none;
+}
+
+.currency {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ==================== E. MEASUREMENT CHART ==================== */
+.measurement-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  padding: 10px 14px;
+  border: 1px solid #000000;
+  border-top: none;
+}
+
+.measurement-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 0;
+}
+
+.measurement-label {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.measurement-input {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #000000;
+  background: transparent;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #000000;
+  outline: none;
+  padding: 0;
+}
+
+/* ==================== F. SPECIAL NOTES & FOOTER ==================== */
+.notes-section {
+  margin-top: 10px;
+  padding: 6px 2px 2px;
+}
+
+.notes-title {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.notes-input {
+  margin-bottom: 6px;
+  height: 22px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.footer-thanks {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.social-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 13px;
+}
+
+.social-row .fa-instagram {
+  font-size: 18px;
+  color: #000000;
+}
+
+.footer-terms {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 12px;
+  font-style: italic;
+  color: #000000;
+}
+
+/* ==================== SHARED INPUT HELPERS ==================== */
+.dotted-input {
+  border: none;
+  border-bottom: 1px dotted #000000;
+  background: transparent;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #000000;
+  padding: 1px 4px;
+  outline: none;
+  width: 100%;
+}
+
+.dotted-input:focus,
+.sales-details input:focus,
+.totals-input:focus,
+.measurement-input:focus {
+  background: #f3f4f6;
+}
+
+/* ==================== PRINT BUTTON (SCREEN ONLY) ==================== */
+.print-btn {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 999;
+  background: #111827;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.print-btn:hover {
+  background: #374151;
+}
+
+/* ==================== PRINT MEDIA QUERIES ==================== */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  body {
+    background: #ffffff;
+    padding: 0;
+  }
+
+  #invoice-container {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    padding: 12mm 10mm;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .dotted-input:focus,
+  .sales-details input:focus,
+  .totals-input:focus,
+  .measurement-input:focus {
+    background: transparent;
+  }
+}

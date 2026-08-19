@@ -1,32 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
-import { IndianRupee, FileText, Users, ArrowUpRight, ArrowDownRight, Clock, CheckCircle2, AlertCircle } from 'lucide-react';
+import { DollarSign, FileText, Users, ArrowUpRight, Clock, CheckCircle2, AlertCircle, PlayCircle, Loader2 } from 'lucide-react';
 
 const Dashboard = () => {
   const { user, token } = useAuth();
   const navigate = useNavigate();
 
   const [invoices, setInvoices] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   const API_URL = import.meta.env.VITE_API_URL || 'https://lakshara-fashions-billing-backend.onrender.com/api';
 
   useEffect(() => {
-    const fetchInvoices = async () => {
+    const fetchDashboardData = async () => {
       try {
-        const response = await fetch(`${API_URL}/invoices`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        const data = await response.json();
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to fetch dashboard statistics.');
+        const [invoicesRes, ordersRes] = await Promise.all([
+          fetch(`${API_URL}/invoices`, {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          }),
+          fetch(`${API_URL}/orders`, {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          })
+        ]);
+
+        if (!invoicesRes.ok || !ordersRes.ok) {
+          throw new Error('Failed to fetch dashboard statistics.');
         }
-        setInvoices(data.invoices || []);
+
+        const invoicesData = await invoicesRes.json();
+        const ordersData = await ordersRes.json();
+
+        setInvoices(invoicesData.invoices || []);
+        setOrders(ordersData.orders || []);
       } catch (err) {
         console.error(err);
         setError(err.message || 'Error loading dashboard.');
@@ -36,7 +50,7 @@ const Dashboard = () => {
     };
 
     if (token) {
-      fetchInvoices();
+      fetchDashboardData();
     }
   }, [token]);
 
@@ -48,32 +62,28 @@ const Dashboard = () => {
     day: 'numeric',
   });
 
-  // Calculate stats from live invoices
+  // Calculate stats from live data
   const totalRevenue = invoices.reduce((sum, inv) => sum + parseFloat(inv.total_amount), 0);
   const uniquePhones = new Set(invoices.map(inv => inv.customer_phone));
   const uniqueClientsCount = uniquePhones.size;
   const totalInvoicesCount = invoices.length;
 
+  // Calculate order statuses
+  const pendingOrders = orders.filter(o => o.status === 'Pending').length;
+  const inProgressOrders = orders.filter(o => o.status === 'In Progress').length;
+  const completedOrders = orders.filter(o => o.status === 'Completed').length;
+  const totalOrdersCount = orders.length;
+
   const stats = [
     {
       title: 'Total Revenue',
-      value: `₹${totalRevenue.toFixed(2)}`,
+      value: `$${totalRevenue.toFixed(2)}`,
       change: 'Synced Live',
       isPositive: true,
-      icon: IndianRupee,
+      icon: DollarSign,
       iconBg: 'bg-indigo-50',
       iconColor: 'text-indigo-600',
       borderColor: 'border-indigo-100',
-    },
-    {
-      title: 'Pending Amount',
-      value: '₹0.00',
-      change: 'Fully Paid',
-      isPositive: true,
-      icon: Clock,
-      iconBg: 'bg-amber-50',
-      iconColor: 'text-amber-600',
-      borderColor: 'border-amber-100',
     },
     {
       title: 'Paid Invoices',
@@ -95,6 +105,40 @@ const Dashboard = () => {
       iconColor: 'text-blue-600',
       borderColor: 'border-blue-100',
     },
+    {
+      title: 'Total Orders',
+      value: totalOrdersCount.toString(),
+      change: 'Stitching track book',
+      isPositive: true,
+      icon: FileText,
+      iconBg: 'bg-purple-50',
+      iconColor: 'text-purple-600',
+      borderColor: 'border-purple-100',
+    },
+  ];
+
+  const orderSummary = [
+    {
+      label: 'Pending Orders',
+      count: pendingOrders,
+      icon: Clock,
+      colorClass: 'text-amber-600 bg-amber-50 border-amber-100',
+      barColor: 'bg-amber-500'
+    },
+    {
+      label: 'In Progress',
+      count: inProgressOrders,
+      icon: Loader2,
+      colorClass: 'text-blue-600 bg-blue-50 border-blue-100',
+      barColor: 'bg-blue-500'
+    },
+    {
+      label: 'Completed',
+      count: completedOrders,
+      icon: CheckCircle2,
+      colorClass: 'text-emerald-600 bg-emerald-50 border-emerald-100',
+      barColor: 'bg-emerald-500'
+    }
   ];
 
   const recentInvoices = invoices.slice(0, 5);
@@ -166,10 +210,44 @@ const Dashboard = () => {
         })}
       </section>
 
+      {/* Orders Status Summary Section */}
+      <section className="bg-white border border-slate-200 rounded-2xl p-6 mb-8 shadow-sm">
+        <div className="mb-6">
+          <h3 className="text-lg font-bold text-slate-900">Orders Status Summary</h3>
+          <p className="text-xs text-slate-500 mt-0.5">Real-time status tracking of custom orders in production</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {orderSummary.map((item, index) => {
+            const Icon = item.icon;
+            const percentage = totalOrdersCount > 0 ? (item.count / totalOrdersCount) * 100 : 0;
+            return (
+              <div key={index} className="border border-slate-100 rounded-xl p-5 hover:border-slate-200 transition duration-150 bg-slate-50/50">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-sm font-semibold text-slate-650">{item.label}</span>
+                  <div className={`p-2 rounded-lg border ${item.colorClass}`}>
+                    <Icon className={`w-4 h-4 ${item.label === 'In Progress' && item.count > 0 ? 'animate-spin' : ''}`} />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-3xl font-extrabold text-slate-900">{item.count}</h4>
+                  <div className="w-full bg-slate-200 h-1.5 rounded-full mt-3 overflow-hidden">
+                    <div className={`${item.barColor} h-1.5 rounded-full`} style={{ width: `${percentage}%` }}></div>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-semibold block mt-2">
+                    {percentage.toFixed(0)}% of total orders
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
       {/* Details Grid (Recent Invoices & Activity) */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Recent Invoices Table */}
-        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-6">
+        <div className="lg:col-span-3 bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex justify-between items-center mb-6">
             <div>
               <h3 className="text-lg font-bold text-slate-900">Recent Invoices</h3>
@@ -186,19 +264,19 @@ const Dashboard = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-slate-200 text-slate-400 text-xs font-bold uppercase tracking-wider">
-                  <th className="py-3.5 px-4 font-semibold">ID</th>
-                  <th className="py-3.5 px-4 font-semibold">Client</th>
-                  <th className="py-3.5 px-4 font-semibold">Date</th>
-                  <th className="py-3.5 px-4 font-semibold">Amount</th>
-                  <th className="py-3.5 px-4 font-semibold text-right">Status</th>
+                <tr className="border-b border-slate-200 text-slate-400 text-xs font-bold uppercase tracking-wider bg-slate-50/50">
+                  <th className="py-3 px-4">Invoice ID</th>
+                  <th className="py-3 px-4">Customer Name</th>
+                  <th className="py-3 px-4">Invoice Date</th>
+                  <th className="py-3 px-4">Total Amount</th>
+                  <th className="py-3 px-4 text-right">Payment</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-sm">
                 {recentInvoices.length === 0 ? (
                   <tr>
-                    <td colSpan="5" className="py-8 text-center text-slate-400 text-sm">
-                      No invoices created yet. Click "+ Create Invoice" to start billing.
+                    <td colSpan="5" className="py-8 text-center text-slate-400 text-xs">
+                      No invoices created yet.
                     </td>
                   </tr>
                 ) : (
@@ -206,13 +284,14 @@ const Dashboard = () => {
                     const formattedDate = new Date(invoice.invoice_date).toLocaleDateString('en-IN', {
                       day: '2-digit',
                       month: 'short',
+                      year: 'numeric'
                     });
                     return (
                       <tr key={invoice.id} className="hover:bg-slate-50 transition duration-150">
                         <td className="py-3.5 px-4 font-mono font-medium text-slate-600">{invoice.invoice_number}</td>
                         <td className="py-3.5 px-4 text-slate-800 font-semibold">{invoice.customer_name}</td>
                         <td className="py-3.5 px-4 text-slate-500">{formattedDate}</td>
-                        <td className="py-3.5 px-4 text-slate-900 font-bold">₹{Number(invoice.total_amount).toFixed(2)}</td>
+                        <td className="py-3.5 px-4 text-slate-900 font-bold">${Number(invoice.total_amount).toFixed(2)}</td>
                         <td className="py-3.5 px-4 text-right">
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100 uppercase">
                             {invoice.payment_method}
@@ -224,35 +303,6 @@ const Dashboard = () => {
                 )}
               </tbody>
             </table>
-          </div>
-        </div>
-
-        {/* Quick Actions / Security Card */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between">
-          <div>
-            <h3 className="text-lg font-bold text-slate-900 mb-1">Security & Profile</h3>
-            <p className="text-xs text-slate-500 mb-6">Verify login status and details</p>
-            
-            <div className="space-y-4">
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Account ID</span>
-                <div className="text-sm font-semibold text-slate-700 mt-1 select-all break-all">
-                  {user?.id || '—'}
-                </div>
-              </div>
-
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Auth Token Status</span>
-                <div className="flex items-center gap-2 text-emerald-600 font-semibold text-sm mt-1">
-                  <CheckCircle2 className="w-4 h-4 shrink-0" />
-                  <span>Verified & Encrypted</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 pt-6 border-t border-slate-200 text-xs text-slate-400 text-center leading-relaxed">
-            Lakshara Fashions secure environment. Authorized access only. Your sessions are encrypted end-to-end.
           </div>
         </div>
       </section>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lakshara Fashion - Sales Invoice &amp; Measurement Sheet</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <button class="print-btn no-print" onclick="window.print()">Print / Save as PDF</button>
+
+  <div id="invoice-container">
+
+    <!-- ==================== B. HEADER SECTION ==================== -->
+    <header class="header">
+      <div class="header-left">
+        <img src="/logo.png" alt="Lakshara Fashion Logo" class="logo-img">
+      </div>
+      <div class="header-right">
+        <h1 class="company-name">Lakshara Fashion (S) Pte Ltd</h1>
+        <p class="company-address">Little India Arcade, 48 Serangoon Rd, # 01 - 63, Singapore 217959</p>
+        <p class="company-phone"><span class="diamond">&#9670;</span> 8225 1605</p>
+      </div>
+    </header>
+
+    <!-- ==================== TOP DETAILS TABLE ==================== -->
+    <table class="top-details">
+      <tbody>
+        <tr>
+          <td class="detail-cell">
+            <label for="customer-name">Customer Name :</label>
+            <input type="text" id="customer-name" class="dotted-input">
+          </td>
+          <td class="detail-cell">
+            <label for="sl-no" class="serial-no-label">Sl No :</label>
+            <input type="text" id="sl-no" class="dotted-input serial-no-input" value="001" readonly>
+          </td>
+        </tr>
+        <tr>
+          <td class="detail-cell">
+            <label for="mobile-no">Mobile No. :</label>
+            <input type="text" id="mobile-no" class="dotted-input">
+          </td>
+          <td class="detail-cell">
+            <label for="invoice-date">Date :</label>
+            <input type="date" id="invoice-date" class="dotted-input">
+          </td>
+        </tr>
+        <tr>
+          <td class="detail-cell">
+            <label for="garment-type">Garment Type :</label>
+            <input type="text" id="garment-type" class="dotted-input">
+          </td>
+          <td class="detail-cell">
+            <label for="order-no">Order No :</label>
+            <input type="text" id="order-no" class="dotted-input">
+          </td>
+        </tr>
+        <tr>
+          <td class="detail-cell"></td>
+          <td class="detail-cell">
+            <label for="collection-date">Collection Date :</label>
+            <input type="date" id="collection-date" class="dotted-input">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ==================== C. SALES DETAILS TABLE ==================== -->
+    <section class="sales-section">
+      <div class="section-bar">
+        <h2 class="section-title">SALES DETAILS</h2>
+      </div>
+
+      <table class="sales-details">
+        <thead>
+          <tr>
+            <th class="col-sno">S.No</th>
+            <th class="col-desc">Description (Saree / Blouse / Alteration / Item)</th>
+            <th class="col-qty">Qty</th>
+            <th class="col-rate">Rate</th>
+            <th class="col-amount">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cell-sno"><input type="text" class="sno-input" value="1" readonly></td>
+            <td class="cell-desc"><input type="text" class="desc-input"></td>
+            <td class="cell-qty"><input type="number" class="qty-input" min="0" step="any"></td>
+            <td class="cell-rate"><input type="number" class="rate-input" min="0" step="any"></td>
+            <td class="cell-amount"><input type="text" class="amount-input" readonly></td>
+          </tr>
+          <tr>
+            <td class="cell-sno"><input type="text" class="sno-input" value="2" readonly></td>
+            <td class="cell-desc"><input type="text" class="desc-input"></td>
+            <td class="cell-qty"><input type="number" class="qty-input" min="0" step="any"></td>
+            <td class="cell-rate"><input type="number" class="rate-input" min="0" step="any"></td>
+            <td class="cell-amount"><input type="text" class="amount-input" readonly></td>
+          </tr>
+          <tr>
+            <td class="cell-sno"><input type="text" class="sno-input" value="3" readonly></td>
+            <td class="cell-desc"><input type="text" class="desc-input"></td>
+            <td class="cell-qty"><input type="number" class="qty-input" min="0" step="any"></td>
+            <td class="cell-rate"><input type="number" class="rate-input" min="0" step="any"></td>
+            <td class="cell-amount"><input type="text" class="amount-input" readonly></td>
+          </tr>
+          <tr>
+            <td class="cell-sno"><input type="text" class="sno-input" value="4" readonly></td>
+            <td class="cell-desc"><input type="text" class="desc-input"></td>
+            <td class="cell-qty"><input type="number" class="qty-input" min="0" step="any"></td>
+            <td class="cell-rate"><input type="number" class="rate-input" min="0" step="any"></td>
+            <td class="cell-amount"><input type="text" class="amount-input" readonly></td>
+          </tr>
+          <tr>
+            <td class="cell-sno"><input type="text" class="sno-input" value="5" readonly></td>
+            <td class="cell-desc"><input type="text" class="desc-input"></td>
+            <td class="cell-qty"><input type="number" class="qty-input" min="0" step="any"></td>
+            <td class="cell-rate"><input type="number" class="rate-input" min="0" step="any"></td>
+            <td class="cell-amount"><input type="text" class="amount-input" readonly></td>
+          </tr>
+          <tr>
+            <td class="cell-sno"><input type="text" class="sno-input" value="6" readonly></td>
+            <td class="cell-desc"><input type="text" class="desc-input"></td>
+            <td class="cell-qty"><input type="number" class="qty-input" min="0" step="any"></td>
+            <td class="cell-rate"><input type="number" class="rate-input" min="0" step="any"></td>
+            <td class="cell-amount"><input type="text" class="amount-input" readonly></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ==================== D. TOTALS SECTION ==================== -->
+    <section class="totals-section">
+      <table class="totals-table">
+        <tbody>
+          <tr>
+            <td class="total-label">Total Amount :</td>
+            <td class="total-value">
+              <span class="currency">$</span>
+              <input type="text" id="total-amount" class="totals-input" readonly>
+            </td>
+          </tr>
+          <tr>
+            <td class="total-label">Advance Paid :</td>
+            <td class="total-value">
+              <span class="currency">$</span>
+              <input type="text" id="advance-paid" class="totals-input" inputmode="decimal">
+            </td>
+          </tr>
+          <tr>
+            <td class="total-label">Balance Due :</td>
+            <td class="total-value">
+              <span class="currency">$</span>
+              <input type="text" id="balance-due" class="totals-input" readonly>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ==================== E. MEASUREMENT CHART ==================== -->
+    <section class="measurement-section">
+      <div class="section-bar">
+        <h2 class="section-title">MEASUREMENT CHART (inches)</h2>
+      </div>
+
+      <div class="measurement-grid">
+        <div class="measurement-column">
+          <div class="measurement-row">
+            <span class="measurement-label">Length</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+          <div class="measurement-row">
+            <span class="measurement-label">Shoulder</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+          <div class="measurement-row">
+            <span class="measurement-label">Sleeve Length</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+          <div class="measurement-row">
+            <span class="measurement-label">Sleeve Round</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+          <div class="measurement-row">
+            <span class="measurement-label">Chest / Bust</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+          <div class="measurement-row">
+            <span class="measurement-label">Waist</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+          <div class="measurement-row">
+            <span class="measurement-label">Hip</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+        </div>
+
+        <div class="measurement-column">
+          <div class="measurement-row">
+            <span class="measurement-label">Neck</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+          <div class="measurement-row">
+            <span class="measurement-label">Armhole</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+          <div class="measurement-row">
+            <span class="measurement-label">Front Neck</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+          <div class="measurement-row">
+            <span class="measurement-label">Back Neck</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+          <div class="measurement-row">
+            <span class="measurement-label">Petticoat Length</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+          <div class="measurement-row">
+            <span class="measurement-label">Petticoat Waist</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+          <div class="measurement-row">
+            <span class="measurement-label">Blouse Back Length</span>
+            <input type="number" class="measurement-input" min="0" step="any">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== F. SPECIAL NOTES & FOOTER ==================== -->
+    <section class="notes-section">
+      <p class="notes-title">Special Notes :</p>
+      <input type="text" class="dotted-input notes-input">
+      <input type="text" class="dotted-input notes-input">
+    </section>
+
+    <footer class="footer">
+      <p class="footer-thanks">Thank you for choosing Lakshara Fashion</p>
+      <div class="social-row">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+        <span>@lakshara_fashion</span>
+      </div>
+      <p class="footer-terms">Goods once sold / altered will not be taken back or exchanged</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
